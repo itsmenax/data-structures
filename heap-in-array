@@ -1,0 +1,70 @@
+"""
+heap in an array, how to implement a min heap using array
+
+heap with 3 properties, its standarted: 
+- nmax maximum size of the heap
+- n how many objects are there in the hewap 
+- a is the array of integer of n max 
+"""
+
+import array
+
+"""
+    rules of heap: the parent must always lower than children
+    every level must be filed from left to right
+
+    indices of parent if the child is i:
+    (i-1)//2
+
+    indices of child if the parent is i:
+    2i + 1 and 2i + 2
+ """
+
+class MyHeap:
+    def __init__(self, nmax, n = 0):
+        self.nmax = nmax
+        self.n = n
+        self.a = array.array('i',[0]*nmax) #were calling the package of array, because its in a single module
+    def push(self, x): #were just filling it from left to right
+        #will the value fit into my predefined array?
+        if self.n ==self.nmax:
+            print("error")
+        else:
+            self.a[self.n]=x
+            i = self.n
+            self.n +=1
+            # next step is comparing the child and the parent whether theyre correct, if not switch
+            while self.a[i] < self.a[(i-1)//2] and i>0:
+                self.a[i] = self.a[(i-1)//2]
+                self.a[(i-1)//2] = self.a[i] #swapping
+                i= (i-1)//2
+
+    def pop(self): #removes the root and moves the most right lowest and starts comparing
+        if self.n==0:
+            print("error")
+        else:
+            temp=self.a[0]
+            self.n -=1
+            self.a[0]=self.a[self.n]
+            i=0
+            flag=0
+            while i <= self.n -1 and flag ==0:
+                left = 2*i+1
+                right = 2*i+2
+                imin=i
+                if left < self.n and self.a[left] < self.a[imin]:
+                    imin = left
+                if right < self.n and self.a[right] < self.a[imin]:
+                    imin = right
+                if imin != i:
+                    self.a[i], self.a[imin] = self.a[imin], self.a[i]
+                else:
+                    flag = 1 #its gonna break the loop of swapping, cuz its in the right position
+            return temp
+
+H=MyHeap(5)
+H.push(5)
+H.push(6)
+H.push(7)
+print(H.a)
+print(H.pop())
