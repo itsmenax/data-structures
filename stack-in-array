@@ -1,0 +1,30 @@
+import array
+class MyStack: #creating an object
+    def __init__(self,nmax): #defining it, constructer
+        self.nmax=nmax
+        self.n = 0
+        #create an array of integers 0 and the size would be n max
+        self.a=array.array('i',[0]*nmax)
+
+    def push(self, x): #appending
+        if self.n < self.nmax: #checking whether i have space
+            self.a[self.n] = x #ill be adding the next number, from left to right
+            self.n =+ 1
+            return x
+        else:
+            print("ERROR")
+    def pop (self): #it returns the value that was recently added (from right to left)
+        if self.n == 0:
+            print("ERROR")
+        else:
+            self.n -= 1
+            return self.a[self.n]
+
+s = MyStack(5)
+
+print(s.a)
+print(s.nmax)
+print(s.n)
+
+print(s.push(4))
+print(s.pop())
