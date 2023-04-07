@@ -1,0 +1,51 @@
+""
+implementing a custom queue using linked list
+the first head, the last tail
+
+create a new node and link it to our linked list
+we'd linked it to the tail :
+    node=Node(x)
+    self.tail.nextval=node
+    self.tail=self.tail.nextval
+
+head-> ... -> ... -> x (new tail)
+
+"""
+
+class Node:
+    def __init__(self, dataval=None):
+        self.dataval = dataval
+        self.nextval = None
+
+#time complexity is constant which is good
+class QueueLinked:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def push(self,x):
+        node=Node(x)
+        if self.tail is None: #if tail is none then the head is also pointing to none
+            self.head = node
+        else:
+            self.tail.nextval = node
+        self.tail = node #setting tail to the newly created node
+
+    def pop(self): #FIFO, extracting the value from the head
+        if self.head is None:
+            print("error")
+        else:
+            temp=self.head    #1 save head to some temporary variable
+            self.head=self.head.nextval     #2 saving head to head.nextval, reassign the head point
+            if self.head is None: #because even if head is pointing to none tail is sitll attached to the value
+                self.tail=None
+            return temp     #3 return the temp value
+            #we can also return temp.dataval
+
+
+QL=QueueLinked()
+print(QL.push(8))
+print(QL.push(9))
+print(QL.pop())
+print(QL.pop())
+print(QL.pop())
