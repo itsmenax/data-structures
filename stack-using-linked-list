@@ -1,0 +1,51 @@
+class Node:
+    # class of node would create a node with some value and its pointing to none
+    def __init__(self, dataval=None):
+        self.dataval = dataval
+        self.nextval = None
+
+class LinkedList: #no arguments, it just creates a pointer that points to none
+    def __init__(self):
+        self.head = None
+    #if we add push its going to be a five point to none
+    #if we add another number its going become the head and go before 5
+
+    def push(self,x):
+        node=Node(x)
+        node.nextval=self.head #its connecting like a node, or else wed lose the first value when adding an anoother
+        self.head=node
+
+    def pop(self):
+        #checking if there are any nodes to begin with
+        if self.head is None:
+            print ('error')
+        else:
+            node = self.head #saving the variable
+            self.head = self.head.nextval #its pointing to the next value of selfhead
+            return node.dataval
+
+    #you have a stack and you want to print every value of the stack, starting with head
+    def listprint(self):
+        node = self.head
+        while node is not None:
+            print(node.dataval)
+            node = node.nextval
+
+    def search(self,x):
+        node=self.head
+        while node is not Node:
+            if node.dataval==x:
+                return print('found')
+            else:
+                node = node.nextval
+        return print('not found')
+
+s = LinkedList() #like stack, S is pointing to None
+s.push(5)
+s.push(4)
+s.push(3)
+s.push(2)
+s.pop()
+print(s)
+s.listprint()
+s.search(5)
