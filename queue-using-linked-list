@@ -2,6 +2,8 @@
 implementing a custom queue using linked list
 the first head, the last tail
 
+FIFO
+
 create a new node and link it to our linked list
 we'd linked it to the tail :
     node=Node(x)
